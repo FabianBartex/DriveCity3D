@@ -29,7 +29,7 @@ public class DestinoTrigger : MonoBehaviour
         }
 
         // Fechar porta após 1 segundo
-       // if (portaAnim != null) Invoke(nameof(FecharPorta), 1f);
+        if (portaAnim != null) Invoke(nameof(FecharPorta), 1f);
 
         // Atualiza estado no manager
         var manager = FindObjectOfType<CorridaManagerTeste>();
@@ -45,10 +45,11 @@ public class DestinoTrigger : MonoBehaviour
         if (portaAnim != null) portaAnim.SetTrigger("Abrir");
     }
 
-    //void FecharPorta()
-   //{
-       // if (portaAnim != null) portaAnim.SetTrigger("Fechar");
-    //}
+    void FecharPorta()
+    {
+        if (portaAnim != null) portaAnim.SetTrigger("Fechar");
+    }
 }
+
 
 
