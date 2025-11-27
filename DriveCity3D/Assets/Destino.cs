@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DestinoTrigger : MonoBehaviour
+public class Destino : MonoBehaviour
 {
     public Animator portaAnim;
     public GameObject clientePrefab;    // prefab do cliente para spawn após chegada
@@ -50,6 +50,3 @@ public class DestinoTrigger : MonoBehaviour
         if (portaAnim != null) portaAnim.SetTrigger("Fechar");
     }
 }
-
-
-

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClienteTrigger : MonoBehaviour
+public class Cliente : MonoBehaviour
 {
     public Animator portaAnim;      // arraste o Animator da porta do carro
     public GameObject clienteObj;   // o objeto visual do cliente (ou o próprio GameObject)
