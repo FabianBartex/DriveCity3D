@@ -2,44 +2,73 @@
 
 public class AddCollidersCidadeMontada : MonoBehaviour
 {
-    public bool forcarBoxNasRuas = true;
+    public bool aplicarEmRuas = true;
+    public bool aplicarEmPredios = true;
+
+    public float tamanhoMinimo = 1.2f; // ignora peças pequenas
+    public string[] ignorarPorNome = new string[]
+    {
+        "tree", "arvore", "poste", "post", "lamp", "light",
+        "cone", "sign", "placa", "bush", "folha", "grass"
+    };
 
     void Start()
     {
         int adicionados = 0;
-
         MeshFilter[] meshes = FindObjectsOfType<MeshFilter>();
 
-        foreach (var mf in meshes)
+        foreach (MeshFilter mf in meshes)
         {
-            // Se já tem collider → ignora
-            if (mf.GetComponent<Collider>() != null)
+            GameObject obj = mf.gameObject;
+
+            // Já tem collider → ignora
+            if (obj.GetComponent<Collider>() != null)
                 continue;
 
-            string nome = mf.name.ToLower();
+            string nome = obj.name.ToLower();
 
-            // DETECTA RUAS / ASFALTO / CALÇADAS
-            bool eRua = nome.Contains("road") ||
-                        nome.Contains("asphalt") ||
-                        nome.Contains("street") ||
-                        nome.Contains("pavement") ||
-                        nome.Contains("sidewalk");
+            // Ignorar por nome
+            foreach (string s in ignorarPorNome)
+                if (nome.Contains(s))
+                    goto PULAR;
 
-            // RUAS → usa BoxCollider
-            if (eRua && forcarBoxNasRuas)
+            // Tamanho mínimo
+            Vector3 size = obj.GetComponent<MeshRenderer>().bounds.size;
+            if (size.x < tamanhoMinimo && size.z < tamanhoMinimo)
+                goto PULAR;
+
+            // Detectar ruas
+            bool eRua =
+                nome.Contains("road") ||
+                nome.Contains("street") ||
+                nome.Contains("asphalt") ||
+                nome.Contains("sidewalk") ||
+                nome.Contains("pavement");
+
+            if (eRua)
             {
-                mf.gameObject.AddComponent<BoxCollider>();
-                adicionados++;
+                if (aplicarEmRuas)
+                {
+                    BoxCollider bc = obj.AddComponent<BoxCollider>();
+                    bc.center = new Vector3(0, -0.05f, 0);
+                    bc.size = new Vector3(bc.size.x, 0.1f, bc.size.z);
+                    adicionados++;
+                }
                 continue;
             }
 
-            // Objetos normais → BoxCollider (leve)
-            // Se quiser MeshCollider nos prédios, avise
-            mf.gameObject.AddComponent<BoxCollider>();
-            adicionados++;
+            // Prédios
+            if (aplicarEmPredios)
+            {
+                obj.AddComponent<BoxCollider>();
+                adicionados++;
+            }
+
+        PULAR:;
         }
 
         Debug.Log("Colliders adicionados: " + adicionados);
     }
 }
+
 
