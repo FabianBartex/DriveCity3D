@@ -11,18 +11,22 @@ public enum EstadoCorrida
 public class CorridaManagerTeste : MonoBehaviour
 {
     public EstadoCorrida estadoAtual = EstadoCorrida.Nenhuma;
-    public Transform cliente;
-    public Transform destino;
+
+    private EstadoCorrida ultimoEstado;
+
+    void Start()
+    {
+        ultimoEstado = estadoAtual;
+        Debug.Log("Estado inicial: " + estadoAtual);
+    }
 
     void Update()
     {
-        Debug.Log("Estado atual: " + estadoAtual);
-    }
-
-    public void IniciarCorrida()
-    {
-        estadoAtual = EstadoCorrida.IndoBuscarCliente;
-        Debug.Log("Corrida iniciada!");
+        // Loga SOMENTE quando o estado muda
+        if (estadoAtual != ultimoEstado)
+        {
+            Debug.Log("Estado atual: " + estadoAtual);
+            ultimoEstado = estadoAtual;
+        }
     }
 }
-

@@ -3288,7 +3288,6 @@ GameObject:
   m_Component:
   - component: {fileID: 120624547}
   - component: {fileID: 120624546}
-  - component: {fileID: 120624548}
   - component: {fileID: 120624549}
   m_Layer: 0
   m_Name: Destino
@@ -3333,18 +3332,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &120624548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 120624545}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 155f79dd4e403cc4b816630438dd222a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &120624549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3358,9 +3345,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   portaAnim: {fileID: 1691147123}
-  clientePrefab: {fileID: 566390964}
+  clientePrefab: {fileID: 7536006767945014870, guid: da5021660c2aaa540bd6f3db33c29bac,
+    type: 3}
   spawnPontoCliente: {fileID: 1705078945}
   abrirDelay: 0
+  destruirClienteDepois: 15
 --- !u!1001 &121424173
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15787,18 +15776,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da5021660c2aaa540bd6f3db33c29bac, type: 3}
---- !u!1 &566390964 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7536006767945014870, guid: da5021660c2aaa540bd6f3db33c29bac,
-    type: 3}
-  m_PrefabInstance: {fileID: 566390963}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &566390965 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7196354828912362732, guid: da5021660c2aaa540bd6f3db33c29bac,
-    type: 3}
-  m_PrefabInstance: {fileID: 566390963}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &567779797 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 0ee37198b24b2164fbbccfbe92fe5d35,
@@ -17486,7 +17463,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
@@ -50133,7 +50110,7 @@ Transform:
   m_GameObject: {fileID: 1705078944}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 65, y: 3.2, z: 317.67}
+  m_LocalPosition: {x: 60.1, y: 0, z: 305.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -54181,8 +54158,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   estadoAtual: 0
-  cliente: {fileID: 566390965}
-  destino: {fileID: 120624547}
 --- !u!4 &1864849983
 Transform:
   m_ObjectHideFlags: 0

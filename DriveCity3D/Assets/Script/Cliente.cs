@@ -1,46 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class Cliente : MonoBehaviour
 {
-    public Animator portaAnim;      // arraste o Animator da porta do carro
-    public GameObject clienteObj;   // o objeto visual do cliente (ou o próprio GameObject)
+    public Animator portaAnim;      // Animator da porta do carro
+    public GameObject clienteObj;   // Objeto visual do cliente
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Player")) return;
+        if (!other.CompareTag("Player"))
+            return;
 
         Debug.Log("ClienteTrigger: carro chegou no cliente.");
 
-        // Checa se existem referências
-        if (portaAnim == null) Debug.LogWarning("ClienteTrigger: portaAnim não atribuído no Inspector.");
-        if (clienteObj == null) Debug.LogWarning("ClienteTrigger: clienteObj não atribuído no Inspector.");
+        // Checagens de seguranÃ§a
+        if (portaAnim == null) Debug.LogWarning("ClienteTrigger: portaAnim nÃ£o atribuÃ­do.");
+        if (clienteObj == null) Debug.LogWarning("ClienteTrigger: clienteObj nÃ£o atribuÃ­do.");
 
-        // Abrir porta
-        if (portaAnim != null) portaAnim.SetTrigger("Abrir");
+        // âœ” Apenas um trigger: animaÃ§Ã£o jÃ¡ abre â†’ espera â†’ fecha
+        if (portaAnim != null)
+            portaAnim.SetTrigger("Abrir");
 
-        // Destruir o cliente (simula entrar no carro) após 0.5s
-        if (clienteObj != null) Destroy(clienteObj, 0.5f);
+        // âœ” Cliente entra no carro (desaparece)
+        if (clienteObj != null)
+            Destroy(clienteObj, 0.5f);
 
-        // Fechar porta após atraso (ajusta tempo conforme sua animação)
-        if (portaAnim != null) Invoke(nameof(FecharPorta), 1f);
-
-        // Avança estado no manager
+        // âœ” Atualiza estado da corrida
         var manager = FindObjectOfType<CorridaManagerTeste>();
         if (manager != null)
         {
             manager.estadoAtual = EstadoCorrida.IndoParaDestino;
-            Debug.Log("ClienteTrigger: estado trocado para IndoParaDestino.");
+            Debug.Log("ClienteTrigger: estado â†’ IndoParaDestino.");
         }
         else
         {
-            Debug.LogWarning("ClienteTrigger: CorridaManagerTeste não encontrado na cena.");
+            Debug.LogWarning("ClienteTrigger: CorridaManagerTeste nÃ£o encontrado.");
         }
     }
-
-    void FecharPorta()
-    {
-        if (portaAnim != null) portaAnim.SetTrigger("Fechar");
-    }
 }
+
